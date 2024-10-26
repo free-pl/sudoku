@@ -15,14 +15,14 @@ Part of the scope of this project was to create an "AI helper" which could help 
 
 ## Generating puzzles
 
-Puzzles are difficult to generate at runtime due to the trade-off described above, so I instead generated a set of puzzle templates using the code in _generatePuzzle.py_, generating 100 templates of each difficulty from easy, medium and hard for a total of 300. A completed puzzle is first generated. This is done by doing a circular shift on a random list of numbers 1-9 and further rearranging rows and columns to abstract the pattern. A random amount of values are then removed from the puzzle. After a certain number of values have been removed, the _SudokuAI_ attempts to solve the puzzle in that state; the program continues with this puzzle only if it can be solved at the given difficulty, and the puzzle is discarded if a solution is not found or if it is solved at a different difficulty level. Once that puzzle is verified, the template is created by assigning each number to a character and storing a string of 81 characters in a text file, which are all included in the repository.\\
+Puzzles are difficult to generate at runtime due to the trade-off described above, so I instead generated a set of puzzle templates using the code in _generatePuzzle.py_, generating 333 templates of each difficulty from easy, medium and hard for a total of 999. A completed puzzle is first generated. This is done by doing a circular shift on a random list of numbers 1-9 and further rearranging rows and columns to abstract the pattern. A random amount of values are then removed from the puzzle. After a certain number of values have been removed, the _SudokuAI_ attempts to solve the puzzle in that state; the program continues with this puzzle only if it can be solved at the given difficulty, and the puzzle is discarded if a solution is not found or if it is solved at a different difficulty level. Once that puzzle is verified, the template is created by assigning each number to a character and storing a string of 81 characters in a text file, which are all included in the repository.\\
 
 The idea of using templates is that there are a series of transformations that can be applied at random to create many different puzzles from the same template, hence using less storage than a bank of complete puzzles, and less time/memory than generating an entirely new puzzle at runtime. See the below calculations for how many puzzles can be obtained per template:\
 9! ways to assign numbers 1-9 to letters a-i = 362,880\
 *4 since there are 4 orientations of the entire puzzle (rotate by 90 degrees) = 1,451,520\
 *3^2 since the 3x3 blocks can be shifted 0-2 times both horizontally and vertically = 13,063,680\
 *2 since the puzzle can also be reflected = 26,127,360 puzzles per template\
-*300 = 7,838,208,000 puzzles total from all 300 templates\
+*999 = 26,101,232,640 puzzles total from all 999 templates\
 
 Because these transformations still preserve the patterns that were used to solve the puzzle, any transformation will theoretically remain solvable. In the future, this code could be integrated into the final program using Python's multiprocessing library to continue generating more templates in the background whilst the user plays. The code which retrieves a template and creates a puzzle using these transformations can be found in _game.py_.
 
